@@ -1,38 +1,60 @@
+# Controls the gameplay
+# class Game
+#   @moves = 0
+#   def initialize(player = 'X')
+#     @player = player
+#   end
+#
+#   def play; end
+#
+#   def set_game
+#     @moves = 0
+#   end
+#
+#   def winner; end
+# end
+require './board.rb'
+
 def main_menu
   movements = 0
   max_movements = 9
   player_mark = 'X'
-  marks = fill_marks
+  # marks = fill_marks
   choice = ''
-  print_board marks
+  # print_board marks
+  board = Board.new
+  board.set
+  board.draw
   loop do
     print "\nSelect the number where you want to put your mark: "
     choice = gets.chomp
-    position = find_choice(choice, marks)
-    if position && player_mark == 'X'
-      marks[position[:row]][position[:column]] = 'X'
-      player_mark = 'O'
-      movements += 1
-    elsif position && player_mark == 'O'
-      marks[position[:row]][position[:column]] = 'O'
-      player_mark = 'X'
-      movements += 1
-    else
-      puts 'Incorrect choice'
-    end
-    print_board marks
+    print 'Incorrect option' unless board.put_mark(choice, player_mark)
+    board.draw
+    # position = find_choice(choice, marks)
+    # if position && player_mark == 'X'
+    #   marks[position[:row]][position[:column]] = 'X'
+    #   player_mark = 'O'
+    #   movements += 1
+    # elsif position && player_mark == 'O'
+    #   marks[position[:row]][position[:column]] = 'O'
+    #   player_mark = 'X'
+    #   movements += 1
+    # else
+    #   puts 'Incorrect choice'
+    # end
+    # print_board marks
 
-    break if check_rules(marks) || movements >= max_movements
+    break if check_rules(board.marks) || movements >= max_movements
   end
-  print 'Another game? y/n '
-  choice = gets.chomp.downcase
-  if choice == 'y'
-    movements = 0
-    marks = fill_marks
-    print_board marks
-  else
-    puts 'Bye!'
-  end
+  # print 'Another game? y/n '
+  # choice = gets.chomp.downcase
+  # if choice == 'y'
+  #   movements = 0
+  #   marks = fill_marks
+  #   print_board marks
+  # else
+  #   puts 'Bye!'
+  # end
 end
 
 def check_rules(board)
@@ -93,39 +115,6 @@ def transpose(matrix)
     end
   end
   new_matrix
-end
-
-def fill_marks
-  matrix = []
-  count = 0
-  0.upto(2) do |i|
-    matrix[i] = []
-    3.times do
-      count += 1
-      matrix[i].push(count.to_s)
-    end
-  end
-  matrix
-end
-
-# find the row and column index of the player's choice and returnt it as a hash
-def find_choice(choice, board)
-  board.each_index do |row_index|
-    if board[row_index].include?(choice)
-      column_index = board[row_index].index(choice)
-      return { row: row_index, column: column_index }
-    end
-  end
-  false
-end
-
-def print_board(marks)
-  puts "\n"
-  puts ' ' << marks[0][0] << ' | ' << marks[0][1] << ' | ' << marks[0][2] << ' '
-  puts '---|---|---'
-  puts ' ' << marks[1][0] << ' | ' << marks[1][1] << ' | ' << marks[1][2] << ' '
-  puts '---|---|---'
-  puts ' ' << marks[2][0] << ' | ' << marks[2][1] << ' | ' << marks[2][2] << ' '
 end
 
 main_menu
