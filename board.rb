@@ -1,42 +1,69 @@
 # Controls the game board
 class Board
-  @marks = []
+  @board = []
 
-  attr_reader :marks
+  attr_reader :board
 
   # prints the game board and the marks
-  def draw
+  def draw_board
     puts "\n"
-    @marks.each do |row|
+    @board.each do |row|
       row.each_with_index do |mark, index|
         print index == row.length - 1 ? " #{mark} " : " #{mark} |"
       end
-      puts "\n---|---|---" unless row == @marks.last
+      puts "\n---|---|---" unless row == @board.last
     end
-    puts "\n"
+    puts "\n\n"
   end
 
   # put the player's mark on the given slot position
   def put_mark(slot, player)
-    @marks.each_index do |row|
-      if @marks[row].include?(slot.to_s)
-        column = @marks[row].index(slot.to_s)
-        return @marks[row][column] = player
+    @board.each_with_index do |row, row_index|
+      if row.include?(slot.to_s)
+        column_index = row.index(slot.to_s)
+        return @board[row_index][column_index] = player
       end
     end
     false
   end
 
   # set the marks with default slot number
-  def set
-    @marks = []
-    count = 0
+  def set_board
+    @board = []
+    slot = 0
     0.upto(2) do |i|
-      @marks[i] = []
+      @board[i] = []
       3.times do
-        count += 1
-        @marks[i].push(count.to_s)
+        slot += 1
+        @board[i].push(slot.to_s)
       end
     end
+  end
+
+  # Switch the values of a row for the values in its corresponding column
+  def rotate_board
+    new_matrix = []
+    board.each_index do |row|
+      new_matrix[row] = []
+      board[row].each_index do |column|
+        new_matrix[row].push(board[column][row])
+      end
+    end
+    new_matrix
+  end
+
+  def obtain_diagonals
+    diagonals = [[], []]
+
+    # Start indexes for left-rigth and rigth-lef diagonals
+    index_rl = -1
+
+    board.each_with_index do |row, index_lr|
+      diagonals[0] << row[index_lr]
+      diagonals[1] << row[index_rl]
+      index_rl -= 1
+      next
+    end
+    diagonals
   end
 end
