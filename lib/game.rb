@@ -1,9 +1,8 @@
-require './board.rb'
+require './lib/board.rb'
 
 # Controls the game events
 class Game < Board
-  attr_reader :moves
-  attr_reader :max_moves
+  attr_reader :player
   def initialize
     @moves = 0
     @max_moves = 9
@@ -13,7 +12,6 @@ class Game < Board
   def new_match
     @moves = 0
     set_board
-    puts "player #{@player.first} starts the game."
     draw_board
   end
 
@@ -26,18 +24,14 @@ class Game < Board
   end
 
   def won?
-    if row_win || column_win || diagonal_win
-      puts "The winner is #{@player.last}"
-      return true
-    end
+    return true if row_win || column_win || diagonal_win
+
     false
   end
 
   def tie?
-    if @moves >= @max_moves
-      puts 'Tie, match is over'
-      return true
-    end
+    return true if @moves >= @max_moves
+
     false
   end
 
