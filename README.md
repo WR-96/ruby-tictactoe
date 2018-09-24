@@ -12,6 +12,6 @@ For Debian/Ubuntu users use the next command:
 `$ sudo apt-get install ruby-full`
 ## Usage
 Once you are in the folder where you clone the repo run:
-`$ irb -r ./script.rb`
+`$ ruby  ./lib/script.rb`
 
 This should start the game, follow the instructions to play it.
