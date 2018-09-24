@@ -41,7 +41,7 @@ class Board
   end
 
   # Switch the values of a row for the values in its corresponding column
-  def rotate_board
+  def spin_board
     new_matrix = []
     board.each_index do |row|
       new_matrix[row] = []

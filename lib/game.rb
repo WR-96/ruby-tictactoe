@@ -24,7 +24,7 @@ class Game < Board
   end
 
   def won?
-    return true if row_win || column_win || diagonal_win
+    return true if linear_win || diagonal_win
 
     false
   end
@@ -35,15 +35,13 @@ class Game < Board
     false
   end
 
-  def row_win
-    board.each do |row|
-      return true if row.uniq.length == 1
-    end
+  def linear_win
+    return true if row_win(board) || row_win(spin_board)
+
     false
   end
 
-  def column_win
-    board = rotate_board
+  def row_win(board)
     board.each do |row|
       return true if row.uniq.length == 1
     end
