@@ -11,7 +11,12 @@ For Debian/Ubuntu users use the next command:
 
 `$ sudo apt-get install ruby-full`
 ## Usage
-Once you are in the folder where you clone the repo run:
-`$ ruby  ./lib/script.rb`
+Once you are in the folder where you clone the repo install the gem
+
+`$ gem install ./TTT-0.0.0.gem`
+
+Then run the interactive ruby and **require** the gem
+
+```$ irb```
 
 This should start the game, follow the instructions to play it.
