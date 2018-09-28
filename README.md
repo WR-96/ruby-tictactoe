@@ -15,8 +15,6 @@ Once you are in the folder where you clone the repo install the gem
 
 `$ gem install ./TTT-0.0.0.gem`
 
-Then run the interactive ruby and **require** the gem
-
-```$ irb```
+Then run the interactive ruby `irb` and **require** the gem `require 'TTT'` then type `TTT.play`
 
 This should start the game, follow the instructions to play it.
