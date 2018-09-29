@@ -18,3 +18,5 @@ Once you are in the folder where you clone the repo install the gem
 Then run the interactive ruby `irb` and **require** the gem `require 'TTT'` then type `TTT.play`
 
 This should start the game, follow the instructions to play it.
+
+![CLI Tic Tac Toe](https://media.giphy.com/media/tJqdmYfycFkEb2cYKb/giphy.gif)
